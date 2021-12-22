@@ -33,9 +33,25 @@
             Sign Up
           </button>
         </form>
+        {{ count }}
+        <button @click="increment">Increment</button>
       </div>
     </div>
   </div>
 </template>
 
-<script></script>
+<script>
+export default {
+  name: 'AppRegister',
+  computed: {
+    count() {
+      return this.$store.state.count;
+    },
+  },
+  methods: {
+    increment() {
+      this.$store.commit('increment');
+    },
+  },
+};
+</script>
