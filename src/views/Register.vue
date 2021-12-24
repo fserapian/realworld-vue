@@ -14,6 +14,7 @@
                 type="text"
                 class="form-control form-control-lg"
                 placeholder="Username"
+                v-model="username"
               />
             </fieldset>
             <fieldset class="form-group">
@@ -21,6 +22,7 @@
                 type="text"
                 class="form-control form-control-lg"
                 placeholder="Email"
+                v-model="email"
               />
             </fieldset>
             <fieldset class="form-group">
@@ -28,6 +30,7 @@
                 type="password"
                 class="form-control form-control-lg"
                 placeholder="Password"
+                v-model="password"
               />
             </fieldset>
             <button type="submit" class="btn btn-lg btn-primary pull-xs-right" :disabled="isSubmitting">
@@ -44,6 +47,13 @@
 <script>
 export default {
   name: 'AppRegister',
+  data() {
+    return {
+      username: '',
+      email: '',
+      password: '',
+    };
+  },
   computed: {
     isSubmitting() {
       return this.$store.state.auth.isSubmitting;
@@ -51,12 +61,9 @@ export default {
   },
   methods: {
     onSubmit() {
-      this.$store.dispatch('register', { username: 'fadi05', email: 'fadi05@email.com', password: 'password' })
-        .then((res) => {
-          console.log('Result', res);
-        })
-        .catch((err) => {
-          console.log('err', err);
+      this.$store.dispatch('register', { username: this.username, email: this.email, password: this.password })
+        .then(() => {
+          this.$router.push({ name: 'home' });
         });
     },
   },
