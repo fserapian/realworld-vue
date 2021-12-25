@@ -7,7 +7,10 @@
           <p class="text-xs-center">
             <router-link :to="{ name: 'login' }">Need an account?</router-link>
           </p>
-          VALIDATION ERRORS
+          <app-validation-errors
+            v-if="validationErrors"
+            :validationErrors="validationErrors"
+          ></app-validation-errors>
           <form @submit.prevent="onSubmit">
             <fieldset class="form-group">
               <input
@@ -33,7 +36,11 @@
                 v-model="password"
               />
             </fieldset>
-            <button type="submit" class="btn btn-lg btn-primary pull-xs-right" :disabled="isSubmitting">
+            <button
+              type="submit"
+              class="btn btn-lg btn-primary pull-xs-right"
+              :disabled="isSubmitting"
+            >
               Sign Up
             </button>
           </form>
@@ -45,8 +52,13 @@
 </template>
 
 <script>
+import AppValidationErrors from '@/components/ValidationErrors';
+
 export default {
   name: 'AppRegister',
+  components: {
+    AppValidationErrors,
+  },
   data() {
     return {
       username: '',
@@ -57,11 +69,19 @@ export default {
   computed: {
     isSubmitting() {
       return this.$store.state.auth.isSubmitting;
-    }
+    },
+    validationErrors() {
+      return this.$store.state.auth.validationErrors;
+    },
   },
   methods: {
     onSubmit() {
-      this.$store.dispatch('register', { username: this.username, email: this.email, password: this.password })
+      this.$store
+        .dispatch('register', {
+          username: this.username,
+          email: this.email,
+          password: this.password,
+        })
         .then(() => {
           this.$router.push({ name: 'home' });
         });
