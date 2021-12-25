@@ -53,6 +53,7 @@
 
 <script>
 import AppValidationErrors from '@/components/ValidationErrors';
+import { actionTypes } from '@/store/modules/auth';
 
 export default {
   name: 'AppRegister',
@@ -77,7 +78,7 @@ export default {
   methods: {
     onSubmit() {
       this.$store
-        .dispatch('register', {
+        .dispatch(actionTypes.register, {
           username: this.username,
           email: this.email,
           password: this.password,

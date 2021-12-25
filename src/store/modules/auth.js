@@ -8,35 +8,45 @@ const state = {
   validationErrors: null,
 };
 
+export const mutationTypes = {
+  registerStart: '[auth] Register start',
+  registerSuccess: '[auth] Register success',
+  registerFailure: '[auth] Register failure',
+};
+
+export const actionTypes = {
+  register: '[auth] Register',
+};
+
 const mutations = {
-  registerStart(state) {
+  [mutationTypes.registerStart](state) {
     state.isSubmitting = true;
     state.validationErrors = null;
   },
-  registerSuccess(state, payload) {
+  [mutationTypes.registerSuccess](state, payload) {
     state.isSubmitting = false;
     state.isLoggedIn = true;
     state.currentUser = payload;
   },
-  registerFailure(state, payload) {
+  [mutationTypes.registerFailure](state, payload) {
     state.isSubmitting = false;
     state.validationErrors = payload;
   },
 };
 
 const actions = {
-  register(context, credentials) {
+  [actionTypes.register](context, credentials) {
     return new Promise((resolve) => {
-      context.commit('registerStart');
+      context.commit(mutationTypes.registerStart);
       auth
         .register(credentials)
         .then((res) => {
-          context.commit('registerSuccess', res.data.user);
+          context.commit(mutationTypes.registerSuccess, res.data.user);
           setItem('accessToken', res.data.user.token);
           resolve();
         })
         .catch((err) => {
-          context.commit('registerFailure', err.response.data.errors);
+          context.commit(mutationTypes.registerFailure, err.response.data.errors);
         });
     });
   },
