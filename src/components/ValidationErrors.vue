@@ -18,14 +18,11 @@ export default {
   computed: {
     errorMessages() {
       return Object.keys(this.validationErrors).map((key) => {
-        const error = this.validationErrors[key];
+        const messages = this.validationErrors[key].join(', ');
 
-        return error.map((e) => {
-          return e[0].toUpperCase() + e.slice(1).toLowerCase();
-        })
-          .join(', ');
+        return `${key} ${messages}`;
       });
-    }
-  }
+    },
+  },
 };
 </script>
