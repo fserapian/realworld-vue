@@ -1,6 +1,17 @@
 <template>
   <div id="app">
-    <h1>Hello Vue</h1>
+    <app-topbar></app-topbar>
     <router-view></router-view>
   </div>
 </template>
+
+<script>
+import AppTopbar from '@/components/Topbar';
+
+export default {
+  name: 'App',
+  components: {
+    AppTopbar,
+  },
+};
+</script>
