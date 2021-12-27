@@ -1,28 +1,31 @@
 <template>
-  <div class="home">
-    <h1>Global Feed</h1>
-    <h1>{{ data.articlesCount }}</h1>
-    <app-feed></app-feed>
+  <div class="home-page">
+    <h2>BANNER</h2>
+    <div class="container page">
+      <div class="row">
+        <div class="col-md-9">
+          <app-feed :api-url="apiUrl"></app-feed>
+        </div>
+        <div class="col-md-3">
+          <div>POPULAR TAGS</div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex';
-
-import AppFeed from '@/components/Feed.vue'
+import AppFeed from '@/components/Feed';
 
 export default {
   name: 'AppGlobalFeed',
   components: {
     AppFeed
   },
-  computed: {
-    ...mapState({
-      data: (state) => state.feed.data,
-    }),
+  data() {
+    return {
+      apiUrl: '/articles',
+    };
   },
-  mounted() {
-    this.$store.dispatch('[feed] Get feed');
-  }
 }
 </script>

@@ -19,6 +19,7 @@ export const actionTypes = {
 const mutations = {
   [mutationTypes.getFeedStart](state) {
     state.isLoading = true;
+    state.data = null;
   },
   [mutationTypes.getFeedSuccess](state, payload) {
     state.isLoading = false;
@@ -30,11 +31,11 @@ const mutations = {
 };
 
 const actions = {
-  [actionTypes.getFeed](context) {
+  [actionTypes.getFeed](context, { apiUrl }) {
     return new Promise((resolve) => {
-      context.commit(mutationTypes.getFeedStart);
+      context.commit(mutationTypes.getFeedStart, apiUrl);
       feed
-        .getFeed()
+        .getFeed(apiUrl)
         .then((res) => {
           context.commit(mutationTypes.getFeedSuccess, res.data);
           resolve(res.data);
