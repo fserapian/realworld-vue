@@ -15,7 +15,6 @@ export default {
     AppTopbar,
   },
   mounted() {
-    console.log('MOUNTED');
     this.$store.dispatch(actionTypes.getCurrentUser);
   },
 };
