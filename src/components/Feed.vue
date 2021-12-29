@@ -23,7 +23,7 @@
           TAG LIST
         </router-link>
       </div>
-      PAGINATION
+      <app-pagination></app-pagination>
     </div>
   </div>
 </template>
@@ -32,9 +32,13 @@
 import { mapState } from 'vuex';
 
 import { actionTypes } from '@/store/modules/feed';
+import AppPagination from '@/components/Pagination';
 
 export default {
   name: 'AppFeed',
+  components: {
+    AppPagination,
+  },
   props: {
     apiUrl: {
       type: String,
