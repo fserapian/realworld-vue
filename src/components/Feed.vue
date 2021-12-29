@@ -23,7 +23,12 @@
           TAG LIST
         </router-link>
       </div>
-      <app-pagination></app-pagination>
+      <app-pagination
+        :total="total"
+        :limit="limit"
+        :current-page="currentPage"
+        :pages="pages"
+      ></app-pagination>
     </div>
   </div>
 </template>
@@ -45,12 +50,22 @@ export default {
       required: true,
     },
   },
+  data() {
+    return {
+      total: 501,
+      limit: 20,
+      currentPage: 5,
+    };
+  },
   computed: {
     ...mapState({
       isLoading: (state) => state.feed.isLoading,
       error: (state) => state.feed.error,
       feed: (state) => state.feed.data,
     }),
+    pages() {
+      return Math.ceil(this.total / this.limit);
+    },
   },
   mounted() {
     this.$store.dispatch(actionTypes.getFeed, { apiUrl: this.apiUrl });
