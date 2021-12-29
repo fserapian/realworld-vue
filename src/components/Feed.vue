@@ -37,6 +37,7 @@
 import { mapState } from 'vuex';
 
 import { actionTypes } from '@/store/modules/feed';
+import { range } from '@/helpers/utils';
 import AppPagination from '@/components/Pagination';
 
 export default {
@@ -64,7 +65,9 @@ export default {
       feed: (state) => state.feed.data,
     }),
     pages() {
-      return Math.ceil(this.total / this.limit);
+      // return Math.ceil(this.total / this.limit);
+      const pagesCount = Math.ceil(this.total / this.limit);
+      return range(pagesCount, 1);
     },
   },
   mounted() {

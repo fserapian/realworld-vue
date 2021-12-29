@@ -27,7 +27,7 @@ export default {
       required: true,
     },
     pages: {
-      type: Number,
+      type: Array,
       required: true,
     },
   },
