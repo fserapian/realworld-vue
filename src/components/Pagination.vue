@@ -1,13 +1,11 @@
 <template>
-  <div class="pagination">
-    PAGINATION!!!!
-    <ul>
-      <li>{{ total }}</li>
-      <li>{{ limit }}</li>
-      <li>{{ currentPage }}</li>
-      <li>{{ pages }}</li>
-    </ul>
-  </div>
+  <ul class="pagination">
+    <li v-for="page in pages" :key="page" class="page-item">
+      <router-link class="page-link" :to="{ path: url, query: { page: page } }">
+        {{ page }}
+      </router-link>
+    </li>
+  </ul>
 </template>
 
 <script>
@@ -20,6 +18,10 @@ export default {
     },
     limit: {
       type: Number,
+      required: true,
+    },
+    url: {
+      type: String,
       required: true,
     },
     currentPage: {

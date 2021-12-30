@@ -26,6 +26,7 @@
       <app-pagination
         :total="total"
         :limit="limit"
+        :url="url"
         :current-page="currentPage"
         :pages="pages"
       ></app-pagination>
@@ -55,6 +56,7 @@ export default {
     return {
       total: 501,
       limit: 20,
+      url: '/articles',
       currentPage: 5,
     };
   },
