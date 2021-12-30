@@ -24,9 +24,9 @@
         </router-link>
       </div>
       <app-pagination
-        :total="total"
+        :total="feed.articlesCount"
         :limit="limit"
-        :url="url"
+        :url="baseUrl"
         :current-page="currentPage"
         :pages="pages"
       ></app-pagination>
@@ -39,6 +39,7 @@ import { mapState } from 'vuex';
 
 import { actionTypes } from '@/store/modules/feed';
 import { range } from '@/helpers/utils';
+import { limit } from '@/helpers/vars';
 import AppPagination from '@/components/Pagination';
 
 export default {
@@ -52,14 +53,6 @@ export default {
       required: true,
     },
   },
-  data() {
-    return {
-      total: 501,
-      limit: 20,
-      url: '/articles',
-      currentPage: 5,
-    };
-  },
   computed: {
     ...mapState({
       isLoading: (state) => state.feed.isLoading,
@@ -68,8 +61,17 @@ export default {
     }),
     pages() {
       // return Math.ceil(this.total / this.limit);
-      const pagesCount = Math.ceil(this.total / this.limit);
+      const pagesCount = Math.ceil(this.feed.articlesCount / this.limit);
       return range(pagesCount, 1);
+    },
+    limit() {
+      return limit;
+    },
+    baseUrl() {
+      return this.$route.path;
+    },
+    currentPage() {
+      return Number(this.$route.query.page || '1');
     },
   },
   mounted() {
