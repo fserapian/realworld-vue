@@ -1,6 +1,6 @@
 <template>
   <ul class="pagination">
-    <li v-for="page in pages" :key="page" class="page-item">
+    <li v-for="page in pages" :key="page" :class="{ active: currentPage === page, 'page-item': true }">
       <router-link class="page-link" :to="{ path: url, query: { page: page } }">
         {{ page }}
       </router-link>
