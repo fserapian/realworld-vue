@@ -61,7 +61,6 @@ export default {
       feed: (state) => state.feed.data,
     }),
     pages() {
-      // return Math.ceil(this.total / this.limit);
       const pagesCount = Math.ceil(this.feed.articlesCount / this.limit);
       return range(pagesCount, 1);
     },
@@ -74,6 +73,9 @@ export default {
     currentPage() {
       return Number(this.$route.query.page || '1');
     },
+    offset() {
+      return this.currentPage * limit - limit;
+    }
   },
   watch: {
     currentPage() {
@@ -88,7 +90,7 @@ export default {
       const parsedUrl = parseUrl(this.apiUrl);
       const stringifiedParams = stringify({
         limit,
-        offset: 0,
+        offset: this.offset,
         ...parsedUrl.query,
       });
 
