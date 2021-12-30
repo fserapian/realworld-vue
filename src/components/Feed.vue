@@ -36,6 +36,7 @@
 
 <script>
 import { mapState } from 'vuex';
+import { parseUrl, stringify } from 'query-string';
 
 import { actionTypes } from '@/store/modules/feed';
 import { range } from '@/helpers/utils';
@@ -74,8 +75,25 @@ export default {
       return Number(this.$route.query.page || '1');
     },
   },
+  watch: {
+    currentPage() {
+      this.fetchFeed();
+    },
+  },
   mounted() {
-    this.$store.dispatch(actionTypes.getFeed, { apiUrl: this.apiUrl });
-  }
-}
+    this.fetchFeed();
+  },
+  methods: {
+    fetchFeed() {
+      const parsedUrl = parseUrl(this.apiUrl);
+      const stringifiedParams = stringify({
+        limit,
+        offset: 0,
+        ...parsedUrl.query,
+      });
+
+      this.$store.dispatch(actionTypes.getFeed, { apiUrl: `${parsedUrl.url}?${stringifiedParams}` });
+    },
+  },
+};
 </script>
