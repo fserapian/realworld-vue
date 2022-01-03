@@ -3,9 +3,6 @@
     <div v-if="isLoading">Loading...</div>
     <div v-if="error">Something went wrong...</div>
     <div class="sidebar" v-if="tags">
-      <!-- <li v-for="(tag, index) in tags" :key="index">
-        {{ tag }}
-      </li> -->
       <p>Popular Tags</p>
       <div class="tag-list">
         <router-link
