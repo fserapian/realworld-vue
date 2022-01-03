@@ -38,6 +38,7 @@ const actions = {
         getTags()
         .then((res) => {
           context.commit(mutationTypes.getTagsSuccess, res.data.tags);
+          resolve(res.data.tags);
         })
         .catch(() => {
           context.commit(mutationTypes.getTagsFailure);
