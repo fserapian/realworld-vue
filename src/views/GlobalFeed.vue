@@ -7,7 +7,9 @@
           <app-feed :api-url="apiUrl"></app-feed>
         </div>
         <div class="col-md-3">
-          <div>POPULAR TAGS</div>
+          <div>
+            <app-tags></app-tags>
+          </div>
         </div>
       </div>
     </div>
@@ -16,11 +18,13 @@
 
 <script>
 import AppFeed from '@/components/Feed';
+import AppTags from '@/components/Tags';
 
 export default {
   name: 'AppGlobalFeed',
   components: {
-    AppFeed
+    AppFeed,
+    AppTags,
   },
   data() {
     return {
