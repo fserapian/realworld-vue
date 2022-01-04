@@ -1,7 +1,7 @@
 <template>
   <div class="feed">
-    <div v-if="isLoading">Loading...</div>
-    <div v-if="error">Something went wrong</div>
+    <app-loading v-if="isLoading"></app-loading>
+    <app-error-message v-if="error"></app-error-message>
     <div v-if="feed">
       <div class="article-preview" v-for="(article, index) in feed.articles" :key="index">
         <div class="article-meta">
@@ -42,11 +42,15 @@ import { actionTypes } from '@/store/modules/feed';
 import { range } from '@/helpers/utils';
 import { limit } from '@/helpers/vars';
 import AppPagination from '@/components/Pagination';
+import AppLoading from '@/components/Loading';
+import AppErrorMessage from '@/components/ErrorMessage';
 
 export default {
   name: 'AppFeed',
   components: {
     AppPagination,
+    AppLoading,
+    AppErrorMessage,
   },
   props: {
     apiUrl: {

@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div v-if="isLoading">Loading...</div>
-    <div v-if="error">Something went wrong...</div>
+    <app-loading v-if="isLoading"></app-loading>
+    <app-error-message v-if="error"></app-error-message>
     <div class="sidebar" v-if="tags">
       <p>Popular Tags</p>
       <div class="tag-list">
@@ -22,9 +22,15 @@
 import { mapState } from 'vuex';
 
 import { actionTypes } from '@/store/modules/tags';
+import AppLoading from '@/components/Loading';
+import AppErrorMessage from '@/components/ErrorMessage';
 
 export default {
   name: 'AppTags',
+  components: {
+    AppLoading,
+    AppErrorMessage,
+  },
   computed: {
     ...mapState({
       isLoading: (state) => state.tags.isLoading,
