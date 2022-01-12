@@ -20,7 +20,11 @@
           <h1>{{ article.title }}</h1>
           <p>{{ article.description }}</p>
           <span>Read more...</span>
-          TAG LIST
+           <ul>
+            <li v-for="(tag, index) in article.tagList" :key="index">
+              {{ tag }}
+            </li>
+          </ul>
         </router-link>
       </div>
       <app-pagination
