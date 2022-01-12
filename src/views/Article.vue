@@ -48,8 +48,8 @@
           <div>
             <p>{{ article.body }}</p>
           </div>
-          <ul>
-            <li v-for="(tag, index) in article.tagList" :key="index">
+          <ul class="tag-list">
+            <li v-for="(tag, index) in article.tagList" :key="index" class="tag-default tag-pill tag-outline">
               {{ tag }}
             </li>
           </ul>

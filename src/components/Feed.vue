@@ -20,8 +20,8 @@
           <h1>{{ article.title }}</h1>
           <p>{{ article.description }}</p>
           <span>Read more...</span>
-           <ul>
-            <li v-for="(tag, index) in article.tagList" :key="index">
+           <ul class="tag-list">
+            <li v-for="(tag, index) in article.tagList" :key="index" class="tag-default tag-pill tag-outline">
               {{ tag }}
             </li>
           </ul>
