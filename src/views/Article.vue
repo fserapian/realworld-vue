@@ -32,7 +32,7 @@
               <i class="ion-edit"></i>
               Edit article
             </router-link>
-            <button class="btn btn-outline-danger btn-sm">
+            <button class="btn btn-outline-danger btn-sm" @click="deleteArticle">
               <i class="ion-trash-a"></i>
               Delete article
             </button>
@@ -84,10 +84,23 @@ export default {
       }
       return this.currentUser.username === this.article.author.username;
     },
+    slug() {
+      return this.$route.params.slug;
+    },
+  },
+  methods: {
+    deleteArticle() {
+      this.$store.dispatch(articleActionTypes.deleteArticle, {
+        slug: this.slug,
+      })
+      .then(() => {
+        this.$router.push({ name: 'globalFeed' });
+      });
+    },
   },
   mounted() {
     this.$store.dispatch(articleActionTypes.getArticle, {
-      slug: this.$route.params.slug,
+      slug: this.slug,
     });
   },
 };
