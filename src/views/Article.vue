@@ -48,11 +48,7 @@
           <div>
             <p>{{ article.body }}</p>
           </div>
-          <ul class="tag-list">
-            <li v-for="(tag, index) in article.tagList" :key="index" class="tag-default tag-pill tag-outline">
-              {{ tag }}
-            </li>
-          </ul>
+          <app-tag-list :tags="article.tagList"></app-tag-list>
         </div>
       </div>
     </div>
@@ -66,12 +62,14 @@ import { actionTypes as articleActionTypes } from '@/store/modules/article';
 import { getterTypes as authGetterTypes } from '@/store/modules/auth';
 import AppLoading from '@/components/Loading';
 import AppErrorMessage from '@/components/ErrorMessage';
+import AppTagList from '@/components/TagList';
 
 export default {
   name: 'AppArticle',
   components: {
     AppLoading,
     AppErrorMessage,
+    AppTagList,
   },
   computed: {
     ...mapState({
