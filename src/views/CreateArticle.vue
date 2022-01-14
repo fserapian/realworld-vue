@@ -1,7 +1,12 @@
 <template>
   <div>
     <h2>Create Article</h2>
-    <app-article-form></app-article-form>
+    <app-article-form
+      :initialValues="initialValues"
+      :errors="validationErrors"
+      :isSubmitting="isSubmitting"
+      @articleSubmit="onSubmit"
+    ></app-article-form>
   </div>
 </template>
 
@@ -12,6 +17,23 @@ export default {
   name: 'AppCreateArticle',
   components: {
     AppArticleForm,
+  },
+  data() {
+    return {
+      initialValues: {
+        title: '',
+        description: '',
+        body: '',
+        tagList: [],
+      },
+      validationErrors: null,
+      isSubmitting: false,
+    };
+  },
+  methods: {
+    onSubmit(data) {
+      console.log('data', data);
+    },
   },
 };
 </script>
