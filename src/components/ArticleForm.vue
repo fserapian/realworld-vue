@@ -1,24 +1,57 @@
 <template>
-  <div>
-    <form @submit.prevent="onSubmit">
-      <div>
-        <label for="title">Title</label>
-        <input type="text" name="title" v-model="title">
+  <div class="editor-page">
+    <div class="container page">
+      <div class="row">
+        <div class="col-md-10 offset-md-1 col-xs-12">
+          VALIDATION ERRORS
+          <form @submit.prevent="onSubmit">
+            <fieldset>
+              <fieldset class="form-group">
+                <input
+                  type="text"
+                  class="form-control form-control-lg"
+                  placeholder="Article title"
+                  v-model="title"
+                />
+              </fieldset>
+              <fieldset class="form-group">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="What's this article about"
+                  v-model="description"
+                />
+              </fieldset>
+              <fieldset class="form-group">
+                <textarea
+                  type="text"
+                  class="form-control"
+                  placeholder="Write your article (in markdown)"
+                  v-model="body"
+                ></textarea>
+              </fieldset>
+              <fieldset class="form-group">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Enter Tags"
+                  v-model="tagList"
+                />
+              </fieldset>
+              <fieldset class="form-group">
+                <button
+                  type="submit"
+                  class="btn btn-lg pull-xs-right btn-primary"
+                  :disabled="isSubmitting"
+                >
+                  Publish Article
+                </button>
+              </fieldset>
+            </fieldset>
+          </form>
+        </div>
       </div>
-      <div>
-        <label for="description">Description</label>
-        <input type="text" name="description" v-model="description">
-      </div>
-      <div>
-        <label for="body">Body</label>
-        <textarea type="text" name="body" v-model="body"></textarea>
-      </div>
-      <div>
-        <label for="tagList">Tag List</label>
-        <input type="text" name="tagList" v-model="tagList">
-      </div>
-      <button type="submit">Add Article</button>
-    </form>
+    </div>
   </div>
 </template>
 

@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h2>Create Article</h2>
     <app-article-form
       :initialValues="initialValues"
       :errors="validationErrors"
