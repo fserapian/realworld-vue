@@ -3,7 +3,10 @@
     <div class="container page">
       <div class="row">
         <div class="col-md-10 offset-md-1 col-xs-12">
-          VALIDATION ERRORS
+          <app-validation-errors
+            v-if="errors"
+            :validationErrors="errors"
+          ></app-validation-errors>
           <form @submit.prevent="onSubmit">
             <fieldset>
               <fieldset class="form-group">
@@ -56,8 +59,13 @@
 </template>
 
 <script>
+import AppValidationErrors from '@/components/ValidationErrors';
+
 export default {
   name: 'AppArticleForm',
+  components: {
+    AppValidationErrors,
+  },
   props: {
     initialValues: {
       type: Object,
@@ -86,7 +94,7 @@ export default {
         title: this.title,
         description: this.description,
         body: this.body,
-        tagList: this.tagList,
+        tagList: this.tagList.split(','),
       };
 
       this.$emit('articleSubmit', formData);
