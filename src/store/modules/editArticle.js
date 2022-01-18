@@ -35,6 +35,7 @@ const mutations = {
   },
   [mutationTypes.getArticleStart](state) {
     state.isLoading = true;
+    state.article = null;
   },
   [mutationTypes.getArticleSuccess](state, payload) {
     state.isLoading = false;
