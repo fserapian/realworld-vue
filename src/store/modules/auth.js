@@ -92,6 +92,11 @@ const mutations = {
     state.isLoggedIn = false;
     state.currentUser = null;
   },
+  [mutationTypes.updateCurrentUserStart]() {},
+  [mutationTypes.updateCurrentUserSuccess](state, payload) {
+    state.currentUser = payload;
+  },
+  [mutationTypes.updateCurrentUserFailure]() {}
 };
 
 const actions = {
@@ -143,10 +148,10 @@ const actions = {
     return new Promise((resolve) => {
       context.commit(mutationTypes.updateCurrentUserStart);
       auth
-        .updateCurretUser(currentUserInput)
-        .then((res) => {
-          context.commit(mutationTypes.updateCurrentUserSuccess, res.data.user);
-          resolve();
+        .updateCurrentUser(currentUserInput)
+        .then((user) => {
+          context.commit(mutationTypes.updateCurrentUserSuccess, user);
+          resolve(user);
         })
         .catch((err) => {
           context.commit(mutationTypes.updateCurrentUserFailure, err.response.data.errors)

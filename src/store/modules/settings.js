@@ -6,14 +6,14 @@ const state = {
 };
 
 const mutations = {
-  [mutationTypes.updateUserStart](state) {
+  [mutationTypes.updateCurrentUserStart](state) {
     state.isSubmitting = true;
     state.validationErrors = null;
   },
-  [mutationTypes.updateUserSuccess](state) {
+  [mutationTypes.updateCurrentUserSuccess](state) {
     state.isSubmitting = false;
   },
-  [mutationTypes.updateUserFailure](state, payload) {
+  [mutationTypes.updateCurrentUserFailure](state, payload) {
     state.isSubmitting = false;
     state.validationErrors = payload;
   },
