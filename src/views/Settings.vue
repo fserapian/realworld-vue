@@ -1,45 +1,78 @@
 <template>
-  <div v-if="currentUser">
-    <form @submit.prevent="onSubmit">
-      <div class="form-group">
-        <label for="image">Image</label>
-        <input type="text" id="image" name="image" v-model="formData.image" />
+  <div class="settings-page" v-if="currentUser">
+    <div class="container page">
+      <div class="row">
+        <div class="col-md-6 offset-md-3 col-xs-12">
+          <h1 class="text-xs-center">Settings</h1>
+          <app-validation-errors
+            :validation-errors="validationErrors"
+          ></app-validation-errors>
+          <form @submit.prevent="onSubmit">
+            <fieldset>
+              <fieldset class="form-group">
+                <input
+                  type="text"
+                  class="form-control form-control-lg"
+                  v-model="formData.image"
+                  placeholder="URL of profile image"
+                />
+              </fieldset>
+              <fieldset class="form-group">
+                <input
+                  type="text"
+                  class="form-control form-control-lg"
+                  v-model="formData.username"
+                  placeholder="Username"
+                />
+              </fieldset>
+              <fieldset class="form-group">
+                <textarea
+                  type="text"
+                  class="form-control form-control-lg"
+                  v-model="formData.bio"
+                  placeholder="Short bio about you"
+                >
+                </textarea>
+              </fieldset>
+              <fieldset class="form-group">
+                <input
+                  type="text"
+                  class="form-control form-control-lg"
+                  v-model="formData.image"
+                  placeholder="URL of profile image"
+                />
+              </fieldset>
+              <fieldset class="form-group">
+                <input
+                  type="text"
+                  class="form-control form-control-lg"
+                  v-model="formData.email"
+                  placeholder="Email"
+                />
+              </fieldset>
+              <fieldset class="form-group">
+                <input
+                  type="password"
+                  class="form-control form-control-lg"
+                  v-model="formData.password"
+                  placeholder="Password"
+                />
+              </fieldset>
+              <button type="submit" class="btn btn-lg btn-primary pull-xs-right" :disabled="isSubmitting">Update Settings</button>
+            </fieldset>
+            <hr>
+            <button type="button" class="btn btn-outline-danger" @click="logout">Or click here to logout</button>
+          </form>
+        </div>
       </div>
-      <div class="form-group">
-        <label for="username">Username</label>
-        <input
-          type="text"
-          id="username"
-          name="username"
-          v-model="formData.username"
-        />
-      </div>
-      <div class="form-group">
-        <label for="bio">Bio</label>
-        <input type="text" id="bio" name="bio" v-model="formData.bio" />
-      </div>
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input type="text" id="email" name="email" v-model="formData.email" />
-      </div>
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input
-          type="text"
-          id="password"
-          name="password"
-          v-model="formData.password"
-        />
-      </div>
-      <button type="submit">Update</button>
-    </form>
-    <button @click="logout">Logout</button>
+    </div>
   </div>
 </template>
 
 <script>
 import { mapGetters, mapState } from 'vuex';
 
+import AppValidationErrors from '@/components/ValidationErrors';
 import {
   getterTypes as authGetterTypes,
   actionTypes as authActionTypes,
@@ -47,6 +80,9 @@ import {
 
 export default {
   name: 'AppSettings',
+  components: {
+    AppValidationErrors,
+  },
   computed: {
     ...mapState({
       isSubmitting: (state) => state.settings.isSubmitting,
@@ -82,10 +118,9 @@ export default {
       });
     },
     logout() {
-      this.$store.dispatch(authActionTypes.logout)
-        .then(() => {
-          this.$router.push({ name: 'globalFeed' });
-        });
+      this.$store.dispatch(authActionTypes.logout).then(() => {
+        this.$router.push({ name: 'globalFeed' });
+      });
     },
   },
 };
