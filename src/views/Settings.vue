@@ -33,6 +33,7 @@
       </div>
       <button type="submit">Update</button>
     </form>
+    <button @click="logout">Logout</button>
   </div>
 </template>
 
@@ -79,6 +80,12 @@ export default {
       this.$store.dispatch(authActionTypes.updateCurrentUser, {
         currentUserInput: this.formData,
       });
+    },
+    logout() {
+      this.$store.dispatch(authActionTypes.logout)
+        .then(() => {
+          this.$router.push({ name: 'globalFeed' });
+        });
     },
   },
 };

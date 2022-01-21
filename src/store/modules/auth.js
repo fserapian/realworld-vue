@@ -25,6 +25,8 @@ export const mutationTypes = {
   updateCurrentUserStart: '[auth] Update current user start',
   updateCurrentUserSuccess: '[auth] Update current user success',
   updateCurrentUserFailure: '[auth] Update current user failure',
+
+  logout: '[auth] Logout',
 };
 
 export const actionTypes = {
@@ -32,6 +34,7 @@ export const actionTypes = {
   login: '[auth] Login',
   getCurrentUser: '[auth] Get current user',
   updateCurrentUser: '[auth] Update current user',
+  logout: '[auth] Logout',
 };
 
 export const getterTypes = {
@@ -96,7 +99,11 @@ const mutations = {
   [mutationTypes.updateCurrentUserSuccess](state, payload) {
     state.currentUser = payload;
   },
-  [mutationTypes.updateCurrentUserFailure]() {}
+  [mutationTypes.updateCurrentUserFailure]() {},
+  [mutationTypes.logout](state) {
+    state.currentUser = null;
+    state.isLoggedIn = false;
+  },
 };
 
 const actions = {
@@ -159,7 +166,11 @@ const actions = {
     });
   },
   [actionTypes.logout](context) {
-    context.commit(mutationTypes.logout);
+    return new Promise((resolve) => {
+      setItem('accessToken', '');
+      context.commit(mutationTypes.logout);
+      resolve();
+    });
   },
 };
 
