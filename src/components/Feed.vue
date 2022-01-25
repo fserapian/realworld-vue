@@ -14,7 +14,14 @@
             </router-link>
             <span class="date">{{ article.createdAt }}</span>
           </div>
-          <div class="pull-xs-right">ADD TO FAVORITES</div>
+          <div class="pull-xs-right">
+            <app-add-to-favorites
+              :is-favorited="article.favorited"
+              :favorites-count="article.favoritesCount"
+              :article-slug="article.slug"
+            >
+            </app-add-to-favorites>
+          </div>
         </div>
         <router-link :to="{ name: 'article', params: { slug: article.slug } }" class="preview-link">
           <h1>{{ article.title }}</h1>
@@ -45,6 +52,7 @@ import AppPagination from '@/components/Pagination';
 import AppLoading from '@/components/Loading';
 import AppErrorMessage from '@/components/ErrorMessage';
 import AppTagList from '@/components/TagList';
+import AppAddToFavorites from '@/components/AddToFavorites';
 
 export default {
   name: 'AppFeed',
@@ -53,6 +61,7 @@ export default {
     AppLoading,
     AppErrorMessage,
     AppTagList,
+    AppAddToFavorites,
   },
   props: {
     apiUrl: {
@@ -90,6 +99,11 @@ export default {
   },
   mounted() {
     this.fetchFeed();
+  },
+  data() {
+    return {
+      // isFavorited: 
+    };
   },
   methods: {
     fetchFeed() {
